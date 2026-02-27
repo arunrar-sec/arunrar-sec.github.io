@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packet Sniffer | arunrar-sec</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/layout.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="../index.html" class="logo mono text-accent">&lt;arunrar-sec /&gt;</a>
+                <div class="menu-toggle" id="mobile-menu">☰</div>
+                <ul class="nav-links">
+                    <li><a href="../index.html">/home</a></li>
+                    <li><a href="../blog.html">/blog</a></li>
+                    <li><a href="../projects.html" class="active">/projects</a></li>
+                    <li><a href="../labs.html">/labs</a></li>
+                    <li><a href="../roadmap.html">/roadmap</a></li>
+                    <li><a href="../about.html">/about</a></li>
+                    <li><button id="theme-toggle" class="btn">Theme</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="container">
+        <h1 class="mono" style="margin: 2rem 0; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+            <span class="text-accent">/</span> packet_sniffer
+        </h1>
+        <article style="max-width: 800px; margin: 0 auto; padding: 2rem 0;">
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+                A raw socket packet sniffer written in Python to analyze TCP/IP traffic. This tool allows for the
+                inspection of packets at the data link layer.
+            </p>
+            <div class="terminal" style="margin: 2rem 0;">
+                <div class="terminal-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <pre><code class="language-python">
+import socket
+import struct
+import textwrap
+
+def main():
+    # Create raw socket
+    conn = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(3))
+    
+    while True:
+        raw_data, addr = conn.recvfrom(65536)
+        dest_mac, src_mac, eth_proto, data = ethernet_frame(raw_data)
+        print(f'\nEthernet Frame:')
+        print(f'Destination: {dest_mac}, Source: {src_mac}, Protocol: {eth_proto}')
+
+def ethernet_frame(data):
+    dest_mac, src_mac, proto = struct.unpack('! 6s 6s H', data[:14])
+    return get_mac_addr(dest_mac), get_mac_addr(src_mac), socket.htons(proto), data[14:]
+
+def get_mac_addr(bytes_addr):
+    bytes_str = map('{:02x}'.format, bytes_addr)
+    return ':'.join(bytes_str).upper()
+
+if __name__ == "__main__":
+    main()
+                </code></pre>
+            </div>
+            <p>
+                Developing this tool helped me understand the structure of Ethernet frames and how data is encapsulated
+                as it moves down the OSI model.
+            </p>
+            <div class="post-navigation">
+                <a href="../projects.html" class="btn">&larr; Back to Projects</a>
+            </div>
+        </article>
+    </main>
+    <footer>
+        <div class="container">
+            <p class="mono">&copy; 2026 arunrar-sec | <a href="https://github.com/arunrar-sec"
+                    target="_blank">GitHub</a></p>
+        </div>
+    </footer>
+    <!-- Scripts -->
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/theme.js"></script>
+</body>
+
+</html>
