@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | arunrar-sec</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/theme.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo mono text-accent">&lt;arunrar-sec /&gt;</a>
+                <div class="menu-toggle" id="mobile-menu">☰</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">/home</a></li>
+                    <li><a href="blog.html">/blog</a></li>
+                    <li><a href="projects.html" class="active">/projects</a></li>
+                    <li><a href="labs.html">/labs</a></li>
+                    <li><a href="roadmap.html">/roadmap</a></li>
+                    <li><a href="about.html">/about</a></li>
+                    <li><button id="theme-toggle" class="btn">Theme</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="mono" style="margin: 2rem 0; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+            <span class="text-accent">/</span> projects
+        </h1>
+
+        <p style="color: var(--text-secondary); margin-bottom: 2rem; max-width: 800px;">
+            A collection of tools, scripts, and applications I've built to solve problems or understand concepts.
+        </p>
+
+        <div class="grid grid-2" id="projects-container">
+            <p class="mono text-accent">Loading projects...</p>
+        </div>
+        <br><br><br><br><br><br>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="mono">&copy; 2026 arunrar-sec | <a href="https://github.com/arunrar-sec"
+                    target="_blank">GitHub</a></p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/projects-data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const projectsContainer = document.getElementById('projects-container');
+
+            if (projectsContainer && typeof PROJECTS_DATA !== 'undefined') {
+                // Sort by date descending
+                const sortedProjects = [...PROJECTS_DATA].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                projectsContainer.innerHTML = '';
+
+                if (sortedProjects.length === 0) {
+                    projectsContainer.innerHTML = '<p class="text-secondary mono">No projects available yet.</p>';
+                    return;
+                }
+
+                sortedProjects.forEach(project => {
+                    const article = document.createElement('article');
+                    article.className = 'card';
+
+                    let tagsHtml = '';
+                    if (project.tags && project.tags.length > 0) {
+                        tagsHtml = project.tags.map(tag => `<span class="badge">${tag}</span>`).join('\n                    ');
+                    }
+
+                    article.innerHTML = `
+                    <div style="margin-bottom: 1rem;">
+                        <h3 style="margin-bottom: 0.5rem;">${project.title}</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9em;">
+                            ${project.summary}
+                        </p>
+                    </div>
+                    <div style="margin-bottom: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        ${tagsHtml}
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="${project.url}" class="btn btn-primary">View Code</a>
+                        ${project.demoUrl && project.demoUrl !== '#' ? `<a href="${project.demoUrl}" class="btn">Demo</a>` : ''}
+                    </div>
+                    `;
+                    projectsContainer.appendChild(article);
+                });
+            } else {
+                projectsContainer.innerHTML = '<p class="text-secondary mono">Error loading projects.</p>';
+            }
+        });
+    </script>
+</body>
+
+</html>

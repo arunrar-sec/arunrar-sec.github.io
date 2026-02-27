@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmap | arunrar-sec</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/theme.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--border-color);
+            top: 0;
+            bottom: 0;
+            left: 20px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 100%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            right: auto;
+            background-color: var(--bg-primary);
+            border: 2px solid var(--accent-color);
+            top: 22px;
+            border-radius: 50%;
+            z-index: 1;
+            left: 15px;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            position: relative;
+        }
+
+        .timeline-item.completed::after {
+            background-color: var(--bg-primary);
+        }
+
+        .timeline-item.completed::before {
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            top: 27px;
+            left: 20px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .timeline-date {
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* Roadmap Expansion Styles */
+        .main-phase {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .main-phase>.timeline-content {
+            transition: all 0.3s ease;
+        }
+
+        .main-phase:hover>.timeline-content {
+            border-color: var(--accent-color);
+        }
+
+        .sub-phases-container {
+            display: none;
+            margin-top: 1.5rem;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .sub-phases-container.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .sub-phases-container .timeline {
+            margin-left: 0;
+            max-width: 100%;
+        }
+
+        .sub-phases-container .timeline-item {
+            padding-right: 0;
+            padding-bottom: 0;
+        }
+
+        .expand-icon {
+            float: right;
+            font-size: 1.5rem;
+            font-weight: 300;
+            line-height: 0.8;
+            color: var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .main-phase.expanded .expand-icon {
+            transform: rotate(45deg);
+        }
+
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .phase-header-left {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo mono text-accent">&lt;arunrar-sec /&gt;</a>
+                <div class="menu-toggle" id="mobile-menu">☰</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">/home</a></li>
+                    <li><a href="blog.html">/blog</a></li>
+                    <li><a href="projects.html">/projects</a></li>
+                    <li><a href="labs.html">/labs</a></li>
+                    <li><a href="roadmap.html" class="active">/roadmap</a></li>
+                    <li><a href="about.html">/about</a></li>
+                    <li><button id="theme-toggle" class="btn">Theme</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="mono" style="margin: 2rem 0; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+            <span class="text-accent">/</span> learning_roadmap
+        </h1>
+
+        <div class="timeline">
+            <!-- Phase -->
+            <div class="timeline-item main-phase completed">
+                <div class="timeline-content">
+                    <div class="phase-header">
+                        <div class="phase-header-left">
+                            <span class="timeline-date mono">Phase 1: Linux Control (Current)</span>
+                            <h3>Shell & Internals</h3>
+                        </div>
+                        <span class="expand-icon">+</span>
+                    </div>
+                    <p>Mastering the shell, file systems, permissions, and bash scripting.</p>
+
+                    <div class="sub-phases-container">
+                        <div class="timeline">
+                            <div class="timeline-item completed">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">1.1 Introduction to Linux</span>
+                                    <h3>Linux File Hierarchy Standard (FHS)</h3>
+                                    <p>Understanding directory structures, core directories like /etc, /var, /bin, and
+                                        navigating the system efficiently.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item completed">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">1.2 Identity & Access</span>
+                                    <h3>User and Permission Management</h3>
+                                    <p>Managing users, groups, working with chmod, chown, sudoers, and understanding the
+                                        significance of the root user.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">1.3 Data Manipulation</span>
+                                    <h3>Text Processing Tools</h3>
+                                    <p>Advanced usage of grep, awk, sed, cut, and sort for log analysis and extracting
+                                        information.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">1.4 Automation Basics</span>
+                                    <h3>Bash Scripting Fundamentals</h3>
+                                    <p>Writing functional bash scripts utilizing variables, loops, conditionals, and
+                                        functions.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">1.5 System Operations</span>
+                                    <h3>System Monitoring & Processes</h3>
+                                    <p>Monitoring performance using top, ps, kill, and managing services effectively via
+                                        systemd/systemctl.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Phase -->
+            <div class="timeline-item main-phase">
+                <div class="timeline-content">
+                    <div class="phase-header">
+                        <div class="phase-header-left">
+                            <span class="timeline-date mono">Phase 2: Networking Deep Dive</span>
+                            <h3>Protocols & Analysis</h3>
+                        </div>
+                        <span class="expand-icon">+</span>
+                    </div>
+                    <p>TCP/IP, OSI model, subnetting, and analyzing traffic with Wireshark.</p>
+
+                    <div class="sub-phases-container">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">2.1 Network Models</span>
+                                    <h3>OSI & TCP/IP Deep Dive</h3>
+                                    <p>Deconstructing the layers of the OSI model and how they map to the practical
+                                        TCP/IP suite.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">2.2 Network Addressing</span>
+                                    <h3>IP Addressing & Subnetting</h3>
+                                    <p>Mastering IPv4/IPv6, CIDR notation, subnet masks, and routing principles.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">2.3 Core Protocols</span>
+                                    <h3>Understanding Network Services</h3>
+                                    <p>Deep dive into DNS, HTTP, FTP, SSH, and SMB. Understanding packet structures and
+                                        common ports.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">2.4 Traffic Analysis</span>
+                                    <h3>Packet Sniffing with Wireshark</h3>
+                                    <p>Capturing and dissecting network traffic, utilizing display filters, and
+                                        identifying malicious patterns.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">2.5 Network Discovery</span>
+                                    <h3>Active Mapping & Recon</h3>
+                                    <p>Using tools like Nmap for host discovery, port scanning techniques, and OS
+                                        footprinting.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Phase -->
+            <div class="timeline-item main-phase">
+                <div class="timeline-content">
+                    <div class="phase-header">
+                        <div class="phase-header-left">
+                            <span class="timeline-date mono">Phase 3: Bash & Automation</span>
+                            <h3>Scripting</h3>
+                        </div>
+                        <span class="expand-icon">+</span>
+                    </div>
+                    <p>Writing robust scripts to automate reconnaissance and system tasks.</p>
+
+                    <div class="sub-phases-container">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">3.1 Advanced Scripting</span>
+                                    <h3>Advanced Bash Techniques</h3>
+                                    <p>Mastering arrays, string manipulation, and leveraging regular expressions within
+                                        scripts.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">3.2 Workflow Efficiency</span>
+                                    <h3>Automating Recon Flows</h3>
+                                    <p>Chaining multiple tools together to build an automated enumeration pipeline.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">3.3 Reliability</span>
+                                    <h3>Error Handling & Logging</h3>
+                                    <p>Implementing trap commands, exit codes, and comprehensive logging mechanisms in
+                                        bash.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">3.4 Web Interactions</span>
+                                    <h3>API Integration with cURL</h3>
+                                    <p>Querying REST APIs, handling JSON responses with jq, and automating web requests.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">3.5 Task Management</span>
+                                    <h3>Cron Jobs & Scheduling</h3>
+                                    <p>Automating script execution intervals and establishing persistence using cron and
+                                        systemd timers.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Phase -->
+            <div class="timeline-item main-phase">
+                <div class="timeline-content">
+                    <div class="phase-header">
+                        <div class="phase-header-left">
+                            <span class="timeline-date mono">Phase 4: Python for Offense</span>
+                            <h3>Tool Development</h3>
+                        </div>
+                        <span class="expand-icon">+</span>
+                    </div>
+                    <p>Building custom tools, socket programming, and interacting with APIs.</p>
+
+                    <div class="sub-phases-container">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">4.1 Programming Basics</span>
+                                    <h3>Python for Hackers</h3>
+                                    <p>Core language features, data structures, context managers, and setting up
+                                        environments.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">4.2 Data Processing</span>
+                                    <h3>File I/O & Text Formats</h3>
+                                    <p>Parsing raw text, JSON, and CSV data efficiently. Scraping basics with
+                                        BeautifulSoup.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">4.3 Low-Level Network</span>
+                                    <h3>Network Socket Programming</h3>
+                                    <p>Building custom TCP/UDP clients and servers. Writing a custom port scanner.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">4.4 Web Interactions</span>
+                                    <h3>Mastering the Requests Library</h3>
+                                    <p>Handling sessions, custom headers, cookies, and automating login sequences.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">4.5 Custom Exploits</span>
+                                    <h3>Developing Exploitation Scripts</h3>
+                                    <p>Translating proof-of-concepts into weaponized Python scripts and argument
+                                        parsing.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Phase -->
+            <div class="timeline-item main-phase">
+                <div class="timeline-content">
+                    <div class="phase-header">
+                        <div class="phase-header-left">
+                            <span class="timeline-date mono">Phase 5: Web Foundations (HTTP/JS)</span>
+                            <h3>The Language of Web</h3>
+                        </div>
+                        <span class="expand-icon">+</span>
+                    </div>
+                    <p>Understanding the protocol of the web, headers, cookies, and DOM manipulation.</p>
+
+                    <div class="sub-phases-container">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">5.1 Protocol Mechanics</span>
+                                    <h3>HTTP Methods & Status Codes</h3>
+                                    <p>Dissecting GET, POST, PUT, DELETE, and understanding server responses.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">5.2 State Management</span>
+                                    <h3>Headers, Cookies, & Sessions</h3>
+                                    <p>Tracking state across a stateless protocol. Understanding JWTs and session
+                                        tokens.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">5.3 Client-Side Execution</span>
+                                    <h3>Understanding the DOM</h3>
+                                    <p>Exploring how browsers render HTML and manage the Document Object Model tree.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">5.4 Scripting the Web</span>
+                                    <h3>JavaScript Security Context</h3>
+                                    <p>Variable scopes, closures, event listeners, and common secure coding pitfalls.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">5.5 Browser Security Mechanisms</span>
+                                    <h3>SOP & CORS</h3>
+                                    <p>Mastering the Same-Origin Policy and Cross-Origin Resource Sharing rules.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Phase -->
+            <div class="timeline-item main-phase">
+                <div class="timeline-content">
+                    <div class="phase-header">
+                        <div class="phase-header-left">
+                            <span class="timeline-date mono">Phase 6: Recon Methodology</span>
+                            <h3>Information Gathering</h3>
+                        </div>
+                        <span class="expand-icon">+</span>
+                    </div>
+                    <p>Passive and active information gathering, subdomain enumeration, and OSINT.</p>
+
+                    <div class="sub-phases-container">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">6.1 Open Source Intel</span>
+                                    <h3>Passive OSINT Techniques</h3>
+                                    <p>Leveraging WHOIS, reverse DNS, search engines, and archives (Wayback Machine).
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">6.2 Advanced Searching</span>
+                                    <h3>Google Dorking for Hackers</h3>
+                                    <p>Crafting advanced search queries to uncover exposed files and vulnerable
+                                        endpoints.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">6.3 Surface Area Mapping</span>
+                                    <h3>Subdomain Enumeration</h3>
+                                    <p>Combining passive (crt.sh, Amass) and active (Sublist3r, brute-forcing) discovery
+                                        methods.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">6.4 Content Discovery</span>
+                                    <h3>Directory & File Fuzzing</h3>
+                                    <p>Utilizing tools like ffuf and Gobuster with custom wordlists to locate hidden
+                                        paths.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">6.5 Fingerprinting</span>
+                                    <h3>Identifying Technologies & WAFs</h3>
+                                    <p>Detecting backend stacks (Wappalyzer, WhatWeb) and bypassing Web Application
+                                        Firewalls.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Phase -->
+            <div class="timeline-item main-phase">
+                <div class="timeline-content">
+                    <div class="phase-header">
+                        <div class="phase-header-left">
+                            <span class="timeline-date mono">Phase 7: Web Exploitation I</span>
+                            <h3>OWASP Top 10</h3>
+                        </div>
+                        <span class="expand-icon">+</span>
+                    </div>
+                    <p>SQL injection, XSS, and IDOR vulnerabilities.</p>
+
+                    <div class="sub-phases-container">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">7.1 Database Exploits</span>
+                                    <h3>SQL Injection (SQLi)</h3>
+                                    <p>Discovering and exploiting Error-based, Union-based, and Blind SQL injection
+                                        flaws.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">7.2 Client-Side Attacks</span>
+                                    <h3>Cross-Site Scripting (XSS)</h3>
+                                    <p>Hunting for Reflected, Stored, and DOM-based XSS to execute malicious scripts.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">7.3 Access Control Flaws</span>
+                                    <h3>Insecure Direct Object References</h3>
+                                    <p>Manipulating parameters to access unauthorized documents or administrative
+                                        actions.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">7.4 Rogue Requests</span>
+                                    <h3>Cross-Site Request Forgery (CSRF)</h3>
+                                    <p>Forcing authenticated users to execute unwanted actions and bypassing CSRF
+                                        tokens.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">7.5 System Compromise</span>
+                                    <h3>Command Injection</h3>
+                                    <p>Escaping user input contexts to execute arbitrary OS commands on the target host.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Phase -->
+            <div class="timeline-item main-phase">
+                <div class="timeline-content">
+                    <div class="phase-header">
+                        <div class="phase-header-left">
+                            <span class="timeline-date mono">Phase 8: Web Exploitation II</span>
+                            <h3>Advanced Attacks</h3>
+                        </div>
+                        <span class="expand-icon">+</span>
+                    </div>
+                    <p>Server-side attacks, deserialization, and template injection.</p>
+
+                    <div class="sub-phases-container">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">8.1 Internal Network Access</span>
+                                    <h3>Server-Side Request Forgery</h3>
+                                    <p>Pivoting through vulnerable web servers to access internal infrastructure and
+                                        cloud metadata.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">8.2 Entity Expansion</span>
+                                    <h3>XML External Entity (XXE)</h3>
+                                    <p>Abusing XML parsers to read local files, execute SSRF, and cause Denial of
+                                        Service.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">8.3 Object Abuse</span>
+                                    <h3>Insecure Deserialization</h3>
+                                    <p>Exploiting native serialization formats (Java, PHP, Python) to achieve Remote
+                                        Code Execution.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">8.4 Template Engine Exploits</span>
+                                    <h3>Server-Side Template Injection</h3>
+                                    <p>Escaping sandbox environments in Jinja, Twig, or FreeMarker to execute system
+                                        commands.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">8.5 Modern Web Abstraction</span>
+                                    <h3>API Security & Exploitation</h3>
+                                    <p>Analyzing REST/GraphQL endpoints, mass assignment, and lack of rate limiting.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Phase -->
+            <div class="timeline-item main-phase">
+                <div class="timeline-content">
+                    <div class="phase-header">
+                        <div class="phase-header-left">
+                            <span class="timeline-date mono">Phase 9: Authentication Attacks</span>
+                            <h3>Identity & Access</h3>
+                        </div>
+                        <span class="expand-icon">+</span>
+                    </div>
+                    <p>Brute force, credential stuffing, OAuth abuse, and session management.</p>
+
+                    <div class="sub-phases-container">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">9.1 Credential Recovery</span>
+                                    <h3>Password Cracking Techniques</h3>
+                                    <p>Utilizing Hashcat and John the Ripper, rule-based mutations, and optimizing
+                                        wordlists.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">9.2 Logic Flaws</span>
+                                    <h3>Bypassing Authentication Mechanisms</h3>
+                                    <p>Exploiting weak reset password flows, default credentials, and parameter
+                                        tampering.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">9.3 Modern Auth Systems</span>
+                                    <h3>Attacking OAuth 2.0 & SAML</h3>
+                                    <p>Identifying misconfigured redirect URIs, stealing tokens, and manipulating
+                                        signature processes.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">9.4 Token Abuse</span>
+                                    <h3>Session & JWT Manipulation</h3>
+                                    <p>Alg-none attacks on JSON Web Tokens, key confusion routines, and session
+                                        hijacking.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">9.5 Secondary Defenses</span>
+                                    <h3>MFA Bypass Strategies</h3>
+                                    <p>Bypassing multi-factor authentication via race conditions, brute-forcing OTC, or
+                                        social engineering.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Phase -->
+            <div class="timeline-item main-phase">
+                <div class="timeline-content">
+                    <div class="phase-header">
+                        <div class="phase-header-left">
+                            <span class="timeline-date mono">Phase 10: Privilege Escalation (Linux)</span>
+                            <h3>Rooting the Box</h3>
+                        </div>
+                        <span class="expand-icon">+</span>
+                    </div>
+                    <p>Kernel exploits, SUID binaries, and misconfigured cron jobs.</p>
+
+                    <div class="sub-phases-container">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">10.1 System Profiling</span>
+                                    <h3>Enumeration for Privilege Escalation</h3>
+                                    <p>Automated enumeration using LinPEAS, evaluating running processes, and spotting
+                                        weak file permissions.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">10.2 Binary Abuses</span>
+                                    <h3>Exploiting SUID/SGID & Capabilities</h3>
+                                    <p>Leveraging misconfigured executable permissions, GTFOBins, and Linux capabilities
+                                        for elevated access.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">10.3 Background Tasks</span>
+                                    <h3>Abusing Cron Jobs & Scheduled Tasks</h3>
+                                    <p>Tinkering with writable scripts, ambiguous environmental paths, and wildcards in
+                                        cron tasks.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">10.4 System Core</span>
+                                    <h3>Linux Kernel Exploitation</h3>
+                                    <p>Identifying kernel versions, understanding Dirty COW (CVE-2016-5195), and
+                                        compiling C-based exploits.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">10.5 Environmental Quirks</span>
+                                    <h3>Shared Libraries & LD_PRELOAD</h3>
+                                    <p>Exploiting sudo rights on environment variables and manipulating shared object
+                                        injections.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Phase -->
+            <div class="timeline-item main-phase">
+                <div class="timeline-content">
+                    <div class="phase-header">
+                        <div class="phase-header-left">
+                            <span class="timeline-date mono">Phase 11: Windows Internals</span>
+                            <h3>OS Architecture</h3>
+                        </div>
+                        <span class="expand-icon">+</span>
+                    </div>
+                    <p>Understanding the registry, services, processes, and PowerShell.</p>
+
+                    <div class="sub-phases-container">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">11.1 Core Components</span>
+                                    <h3>Exploring the Windows Registry</h3>
+                                    <p>Understanding hive structures, autostart execution points (ASEPs), and querying
+                                        SAM data.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">11.2 System Operations</span>
+                                    <h3>Managing Services and Processes</h3>
+                                    <p>Investigating unquoted service paths, weak service permissions, and handle
+                                        manipulation.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">11.3 Security Boundaries</span>
+                                    <h3>Access Tokens & UAC Mechanics</h3>
+                                    <p>Deconstructing SeImpersonatePrivilege, token stealing, and User Account Control
+                                        bypass vectors.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">11.4 Administrative Shell</span>
+                                    <h3>PowerShell for Offensive Action</h3>
+                                    <p>Bypassing execution policies, AMSI evasion, and employing tools like PowerSploit.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">11.5 Telemetry & Logs</span>
+                                    <h3>Windows Event Logs & Sysmon</h3>
+                                    <p>Identifying crucial log IDs, tracing attacker footprints, and understanding EDR
+                                        detection vectors.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Phase -->
+            <div class="timeline-item main-phase">
+                <div class="timeline-content">
+                    <div class="phase-header">
+                        <div class="phase-header-left">
+                            <span class="timeline-date mono">Phase 12: Active Directory Attacks</span>
+                            <h3>Enterprise Security</h3>
+                        </div>
+                        <span class="expand-icon">+</span>
+                    </div>
+                    <p>Kerberoasting, AS-REP roasting, mimicking, and lateral movement.</p>
+
+                    <div class="sub-phases-container">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">12.1 Domain Discovery</span>
+                                    <h3>Active Directory Enumeration</h3>
+                                    <p>Mapping out trust relationships and attack paths using BloodHound, PowerView, and
+                                        ldapsearch.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">12.2 Ticket Extraction</span>
+                                    <h3>Kerberoasting & AS-REP Roasting</h3>
+                                    <p>Requesting service tickets to crack offline and abusing users without
+                                        pre-authentication.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">12.3 Hash Abuse</span>
+                                    <h3>Pass-the-Hash & Pass-the-Ticket</h3>
+                                    <p>Authenticating across services using NTLM hashes or forged Kerberos tokens
+                                        directly in memory.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">12.4 Domain Dominance</span>
+                                    <h3>DCSync & The Golden Ticket</h3>
+                                    <p>Simulating domain controllers to extract the KRBTGT hash and forging virtually
+                                        unlimited access tokens.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">12.5 Host Hopping</span>
+                                    <h3>Lateral Movement Capabilities</h3>
+                                    <p>Executing remote processes via PsExec, WMI, SmbExec, and mapping administrative
+                                        shares.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Phase -->
+            <div class="timeline-item main-phase">
+                <div class="timeline-content">
+                    <div class="phase-header">
+                        <div class="phase-header-left">
+                            <span class="timeline-date mono">Phase 13: Post-Exploitation Ops</span>
+                            <h3>Persistence & Looting</h3>
+                        </div>
+                        <span class="expand-icon">+</span>
+                    </div>
+                    <p>Persistence mechanisms, data exfiltration, and covering tracks.</p>
+
+                    <div class="sub-phases-container">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">13.1 Retaining Access</span>
+                                    <h3>Establishing Deep Persistence</h3>
+                                    <p>Injecting backdoors, scheduled tasks, WMI event subscriptions, and hidden
+                                        registries.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">13.2 Data Extraction</span>
+                                    <h3>Looting & Secure Exfiltration</h3>
+                                    <p>Archiving sensitive data, evading DLP filters, and smuggling data out via DNS or
+                                        ICMP.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">13.3 Built-in Capabilities</span>
+                                    <h3>Living off the Land (LotL)</h3>
+                                    <p>Conducting post-exploitation purely through native OS binaries (Certutil,
+                                        MSBuild, BITSAdmin) to avoid detection.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">13.4 Network Traversal</span>
+                                    <h3>Pivoting and Port Forwarding</h3>
+                                    <p>Routing attack traffic into subnets via SOCKS proxies, Chisel, Proxychains, and
+                                        SSH tunneling.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">13.5 Anti-Forensics</span>
+                                    <h3>Clearing Tracks & Evasion</h3>
+                                    <p>Wiping shell histories, selectively removing event logs, and timestamp
+                                        modification (timestomping).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Phase -->
+            <div class="timeline-item main-phase">
+                <div class="timeline-content">
+                    <div class="phase-header">
+                        <div class="phase-header-left">
+                            <span class="timeline-date mono">Phase 14: Binary Exploitation Basics</span>
+                            <h3>Memory Corruption</h3>
+                        </div>
+                        <span class="expand-icon">+</span>
+                    </div>
+                    <p>Stack-based buffer overflows, shellcoding, and basic reverse engineering.</p>
+
+                    <div class="sub-phases-container">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">14.1 Foundation</span>
+                                    <h3>Introduction to Assembly Language</h3>
+                                    <p>Understanding x86 and x64 CPU architectures, registers, and basic instruction
+                                        sets.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">14.2 Code Analysis</span>
+                                    <h3>Reverse Engineering Fundamentals</h3>
+                                    <p>Decompiling and dissecting ELF and PE binaries using Ghidra, IDA Pro, and
+                                        Radare2.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">14.3 Spatial Control</span>
+                                    <h3>Stack-Based Buffer Overflows</h3>
+                                    <p>Calculating offsets, overwriting instruction pointers (EIP/RIP), and executing
+                                        arbitrary data.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">14.4 Injected Payloads</span>
+                                    <h3>Writing Custom Shellcode</h3>
+                                    <p>Developing platform-specific bytecodes to spawn shells while avoiding bad
+                                        characters.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">14.5 Defeating Defenses</span>
+                                    <h3>Return-Oriented Programming (ROP)</h3>
+                                    <p>Bypassing modern mitigations like DEP and ASLR by chaining existing binary
+                                        gadgets.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Phase -->
+            <div class="timeline-item main-phase">
+                <div class="timeline-content">
+                    <div class="phase-header">
+                        <div class="phase-header-left">
+                            <span class="timeline-date mono">Phase 15: Red Team Operations</span>
+                            <h3>Adversary Simulation</h3>
+                        </div>
+                        <span class="expand-icon">+</span>
+                    </div>
+                    <p>C2 infrastructure, evasion techniques, and full-scope engagement simulation.</p>
+
+                    <div class="sub-phases-container">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">15.1 Command Centers</span>
+                                    <h3>Setting up C2 Infrastructure</h3>
+                                    <p>Deploying tools like Cobalt Strike, Mythic, or Sliver via redirectors and
+                                        obfuscated domains.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">15.2 Initial Access</span>
+                                    <h3>Advanced Phishing Campaigns</h3>
+                                    <p>Crafting persuasive payloads (macros, ISOs, JS) and setting up tracking
+                                        mechanisms.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">15.3 Stealth & OPSEC</span>
+                                    <h3>Operational Security Considerations</h3>
+                                    <p>Maintaining burner infrastructures, segmenting tools, and adopting behaviors to
+                                        remain undiscovered.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">15.4 The Human Element</span>
+                                    <h3>Physical Security & Social Engineering</h3>
+                                    <p>Tailgating, dropping malicious USBs, and manipulating targets over vishing
+                                        campaigns.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <span class="timeline-date mono">15.5 Debriefing</span>
+                                    <h3>Reporting & Remediation Consultation</h3>
+                                    <p>Translating complex attack kill-chains into clear, executive-friendly reports
+                                        with actionable fixes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br><br><br><br><br>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="mono">&copy; 2026 arunrar-sec | <a href="https://github.com/arunrar-sec"
+                    target="_blank">GitHub</a></p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainPhases = document.querySelectorAll('.main-phase');
+            mainPhases.forEach(phase => {
+                // Add keyboard accessibility
+                phase.setAttribute('tabindex', '0');
+
+                phase.addEventListener('click', function (e) {
+                    // Prevent toggling if clicked inside sub-phases or if text is selected
+                    if (e.target.closest('.sub-phases-container') || window.getSelection().toString().length > 0) {
+                        return;
+                    }
+                    this.classList.toggle('expanded');
+                    const subContainer = this.querySelector('.sub-phases-container');
+                    if (subContainer) {
+                        subContainer.classList.toggle('active');
+                    }
+                });
+
+                phase.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
