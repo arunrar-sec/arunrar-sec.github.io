@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>arunrar-sec | Cybersecurity & Code Journal</title>
+    <meta name="description"
+        content="Personal learning platform documenting my journey in programming and cybersecurity.">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/theme.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo mono text-accent">&lt;arunrar-sec /&gt;</a>
+                <div class="menu-toggle" id="mobile-menu">☰</div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">/home</a></li>
+                    <li><a href="blog.html">/blog</a></li>
+                    <li><a href="projects.html">/projects</a></li>
+                    <li><a href="labs.html">/labs</a></li>
+                    <li><a href="roadmap.html">/roadmap</a></li>
+                    <li><a href="about.html">/about</a></li>
+                    <li><button id="theme-toggle" class="btn">Theme</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section style="padding: 4rem 0; text-align: center;">
+            <h1 style="font-size: 3rem; margin-bottom: 1rem;">Building Technical <span
+                    class="text-accent glitch-hover">Depth</span></h1>
+            <p style="font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 2rem;">
+                Documenting my structured journey in programming and cybersecurity.
+                A public proof of work for complex systems, security research, and software engineering.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <a href="blog.html" class="btn btn-primary">Read Latest</a>
+                <a href="projects.html" class="btn">View Projects</a>
+            </div>
+        </section>
+
+        <!-- Current Status / Terminal -->
+        <section class="grid grid-2" style="margin-bottom: 4rem;">
+            <div class="terminal">
+                <div class="terminal-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <div class="mono" style="font-size: 0.9em;">
+                    <p><span class="text-accent">$</span> whoami</p>
+                    <p style="color: var(--text-secondary);">Arun | Student | Security Researcher</p>
+                    <br>
+                    <p><span class="text-accent">$</span> cat current_focus.txt</p>
+                    <p style="color: var(--text-secondary);">
+                        <strong style="color: var(--text-primary);">Phase 1: Linux Control (Current)</strong><br>
+                        [+] 1.1 Introduction to Linux<br>
+                        [+] 1.2 Identity & Access<br>
+                        [+] 1.3 Data Manipulation
+                    </p>
+                    <br>
+                    <p><span class="text-accent blink">_</span></p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Latest Reflection</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    "Consistency is the only algorithm that matters. This week I'm focusing on strengthening my core
+                    Linux skills, diving deep into the File Hierarchy Standard and mastering user permission
+                    management."
+                </p>
+                <span class="badge">Linux</span>
+                <span class="badge">Mindset</span>
+            </div>
+        </section>
+
+        <!-- Featured Section -->
+        <section>
+            <h2 class="mono"
+                style="border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 2rem;">
+                <span class="text-accent">#</span> Featured_Content
+            </h2>
+            <div class="grid grid-3" id="featured-posts-container">
+                <!-- Posts will be dynamically loaded here from js/posts-data.js -->
+            </div>
+        </section>
+        <br><br><br><br><br><br>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="mono">&copy; 2026 arunrar-sec | <a href="https://github.com/arunrar-sec"
+                    target="_blank">GitHub</a></p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/posts-data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const featuredContainer = document.getElementById('featured-posts-container');
+            if (featuredContainer && typeof BLOG_POSTS !== 'undefined') {
+                // Sort explicitly by date descending and get up to 3 most recent posts
+                const featuredPosts = [...BLOG_POSTS]
+                    .sort((a, b) => new Date(b.date) - new Date(a.date))
+                    .slice(0, 3);
+
+                if (featuredPosts.length === 0) {
+                    featuredContainer.innerHTML = '<p class="text-secondary mono">No posts available yet.</p>';
+                    return;
+                }
+
+                featuredPosts.forEach(post => {
+                    const article = document.createElement('article');
+                    article.className = 'card';
+
+                    // Create tags HTML (up to 2 tags to match previous design)
+                    let tagsHtml = '';
+                    if (post.tags && post.tags.length > 0) {
+                        tagsHtml = post.tags.slice(0, 2).map(tag => `<span class="badge">${tag}</span>`).join('\n                    ');
+                    } else if (post.category) {
+                        // Fallback to category if no tags
+                        tagsHtml = `<span class="badge">${post.category}</span>`;
+                    }
+
+                    article.innerHTML = `
+                    <h4><a href="${post.url}">${post.title}</a></h4>
+                    <p style="font-size: 0.9em; color: var(--text-secondary); margin: 0.5rem 0;">
+                        ${post.summary}
+                    </p>
+                    ${tagsHtml}
+                    `;
+                    featuredContainer.appendChild(article);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
