@@ -46,7 +46,9 @@
         <p style="color: var(--text-secondary); margin-bottom: 2rem; max-width: 800px;">
             A collection of tools, scripts, and applications I've built to solve problems or understand concepts.
         </p>
-
+        <h1 class="mono" style="margin: 2rem 0; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+            Coming Soon...
+        </h1>
         <div class="grid grid-2" id="projects-container">
             <p class="mono text-accent">Loading projects...</p>
         </div>
@@ -64,52 +66,7 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/projects-data.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const projectsContainer = document.getElementById('projects-container');
-
-            if (projectsContainer && typeof PROJECTS_DATA !== 'undefined') {
-                // Sort by date descending
-                const sortedProjects = [...PROJECTS_DATA].sort((a, b) => new Date(b.date) - new Date(a.date));
-
-                projectsContainer.innerHTML = '';
-
-                if (sortedProjects.length === 0) {
-                    projectsContainer.innerHTML = '<p class="text-secondary mono">No projects available yet.</p>';
-                    return;
-                }
-
-                sortedProjects.forEach(project => {
-                    const article = document.createElement('article');
-                    article.className = 'card';
-
-                    let tagsHtml = '';
-                    if (project.tags && project.tags.length > 0) {
-                        tagsHtml = project.tags.map(tag => `<span class="badge">${tag}</span>`).join('\n                    ');
-                    }
-
-                    article.innerHTML = `
-                    <div style="margin-bottom: 1rem;">
-                        <h3 style="margin-bottom: 0.5rem;">${project.title}</h3>
-                        <p style="color: var(--text-secondary); font-size: 0.9em;">
-                            ${project.summary}
-                        </p>
-                    </div>
-                    <div style="margin-bottom: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        ${tagsHtml}
-                    </div>
-                    <div style="display: flex; gap: 1rem;">
-                        <a href="${project.url}" class="btn btn-primary">View Code</a>
-                        ${project.demoUrl && project.demoUrl !== '#' ? `<a href="${project.demoUrl}" class="btn">Demo</a>` : ''}
-                    </div>
-                    `;
-                    projectsContainer.appendChild(article);
-                });
-            } else {
-                projectsContainer.innerHTML = '<p class="text-secondary mono">Error loading projects.</p>';
-            }
-        });
-    </script>
+    
 </body>
 
 </html>
